@@ -17,6 +17,11 @@ const AuctionList = () => {
     };
 
     fetchAuctions();
+    // Poll every 1 second
+    const intervalId = setInterval(fetchAuctions, 1000);
+
+    // Cleanup interval on component unmount
+    return () => clearInterval(intervalId);
   }, []);
 
   return (
