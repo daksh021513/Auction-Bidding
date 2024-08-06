@@ -8,12 +8,11 @@ const BidForm = ({ auctionId }) => {
   const handleBid = async (e) => {
     e.preventDefault();
     try {
-      // Sending the bid amount to the server with auctionId
       const response = await api.post(`/auctions/${auctionId}/bid`, { amount: bidAmount });
       alert(response.data.message || 'Bid placed successfully!');
     } catch (error) {
-      console.error('Error placing bid:', error.response.data || error.message);
-      alert('Error placing bid');
+      console.error('Error placing bid:', error.response?.data || error.message);
+      alert(error.response?.data?.message || 'Error placing bid');
     }
   };
 
