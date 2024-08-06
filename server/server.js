@@ -10,6 +10,15 @@ const app = express();
 // Middleware to parse JSON
 app.use(express.json());
 
+
+const cors = require('cors');
+
+app.use(cors({
+  origin: 'http://localhost:3001', // Change this to match your React app's address
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true, // If you need to send cookies or authentication headers
+}));
+
 // Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
@@ -23,10 +32,16 @@ app.get('/', (req, res) => {
   res.send('Hello, World!');
 });
 
+// Import and use your user routes
+const userRoutes = require('./routes/users'); // Ensure the path is correct
+app.use('/api/users', userRoutes); // Use the correct prefix for user routes
+
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+
+
 
 
