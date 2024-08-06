@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
+  import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Register from './components/Register';
 import Login from './components/Login';
 import AuctionList from './components/AuctionList';
+import AuctionDetails from './components/AuctionDetails';
+import UserProfile from './components/UserProfile';
 
 const App = () => {
   const [token, setToken] = useState(null);

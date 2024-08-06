@@ -1,5 +1,7 @@
+// client/src/components/AuctionList.js
 import React, { useEffect, useState } from 'react';
 import api from '../api';
+import BidForm from './BidForm'; // Ensure this path is correct
 
 const AuctionList = () => {
   const [auctions, setAuctions] = useState([]);
@@ -27,6 +29,7 @@ const AuctionList = () => {
             <p>{auction.description}</p>
             <p>Starting Bid: ${auction.startingBid}</p>
             <p>Current Bid: ${auction.currentBid}</p>
+            <BidForm auctionId={auction._id} /> {/* Here is where BidForm is added */}
           </li>
         ))}
       </ul>
