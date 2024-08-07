@@ -1,7 +1,11 @@
-import React, { useState } from 'react';
-import api from '../api';
+// client/src/components/Login.js
 
-const Login = ({ setToken }) => {
+import React, { useState } from 'react';
+import api from '../api'; // Import your custom api module
+import { useHistory } from 'react-router-dom'; 
+import UserProfile from './UserProfile';
+
+const Login = ({ setToken, setUserId }) => {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -15,12 +19,18 @@ const Login = ({ setToken }) => {
     e.preventDefault();
     try {
       const response = await api.post('/users/login', formData);
-      setToken(response.data.token);
-      alert('Login successful');
+      const { token, userId } = response.data;
+      // Assuming the API response returns a token and a userId
+      setToken(token);
+      setUserId(userId);
+      alert('Login Successful')
     } catch (error) {
+      console.error('Error logging in:', error);
       alert('Error logging in');
     }
   };
+
+  
 
   return (
     <form onSubmit={handleSubmit}>
